@@ -26,4 +26,11 @@ public class GlobalExceptionHandler {
         log.error("Exception caught: ", ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + ex.getMessage());
     }
+
+    @ExceptionHandler(DiscountProcessingException.class)
+    public ResponseEntity<String> handleDiscountProcessingException(DiscountProcessingException ex) {
+        log.error("Discount Processing Exception: ", ex);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing discounts. " + ex.getMessage());
+    }
+
 }
