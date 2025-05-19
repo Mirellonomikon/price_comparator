@@ -16,5 +16,6 @@ public interface DiscountRepository extends JpaRepository<Discount, Long> {
     List<Discount> findByStartDateGreaterThanEqualOrderByStartDateDesc(LocalDate date);
     List<Discount> findByStartDateBetweenOrderByStartDateDesc(LocalDate startDate, LocalDate endDate);
     Optional<Discount> findByProductAndStoreAndStartDateLessThanEqualAndEndDateGreaterThanEqual(Product product, Store store, LocalDate startDate, LocalDate endDate);
+
 }
 

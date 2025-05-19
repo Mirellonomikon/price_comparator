@@ -40,5 +40,10 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing product recommendations: " + ex.getMessage());
     }
 
+    @ExceptionHandler(PriceHistoryException.class)
+    public ResponseEntity<String> handlePriceHistoryException(PriceHistoryException ex) {
+        log.error("Price History Exception: ", ex);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing price history: " + ex.getMessage());
+    }
 
 }
