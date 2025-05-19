@@ -41,6 +41,30 @@ public class DiscountsController {
         List<BestDiscountsDto> bestDiscounts = discountService.getBestDiscountsByDate(date, limit);
         return ResponseEntity.ok(bestDiscounts);
     }
+
+    @GetMapping("/new")
+    public ResponseEntity<List<BestDiscountsDto>> getDiscountsLast24Hours() {
+        log.info("Fetching discounts from last 24 hours.");
+        List<BestDiscountsDto> newDiscounts = discountService.getNewDiscountsLast24Hours();
+        return ResponseEntity.ok(newDiscounts);
+    }
+
+    // for testing purposes
+    @GetMapping("/new/24-hour")
+    public ResponseEntity<List<BestDiscountsDto>> getNewDiscounts24HourPeriod(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate) {
+        log.info("Fetching new discounts for 24-hour period starting from: {}", startDate);
+        List<BestDiscountsDto> newDiscounts = discountService.getNewDiscountsAfterDateLast24Hours(startDate);
+        return ResponseEntity.ok(newDiscounts);
+    }
+
+    @GetMapping("/new/after-date")
+    public ResponseEntity<List<BestDiscountsDto>> getDiscountsAfterDate(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        log.info("Fetching new discounts after date: {}", date);
+        List<BestDiscountsDto> newDiscounts = discountService.getNewDiscountsAfterDate(date);
+        return ResponseEntity.ok(newDiscounts);
+    }
 }
 
 
