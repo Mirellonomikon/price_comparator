@@ -46,4 +46,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing price history: " + ex.getMessage());
     }
 
+    @ExceptionHandler(BasketOptimizationException.class)
+    public ResponseEntity<String> handleBasketOptimizationException(BasketOptimizationException ex) {
+        log.error("Basket Optimization Exception: ", ex);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("Error optimizing shopping basket: " + ex.getMessage());
+    }
+
+
 }
