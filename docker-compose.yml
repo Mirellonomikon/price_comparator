@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db
+    environment:
+      - SERVER_PORT=8081
+      - DB_URL=jdbc:postgresql://db:5432/pricecomparator
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - SPRING_PROFILES_ACTIVE=docker
+    volumes:
+      - ./csv_files:/app/csv_files
+    restart: unless-stopped
+
+  db:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=pricecomparator
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database_schema.sql:/docker-entrypoint-initdb.d/database_schema.sql
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
