@@ -49,9 +49,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BasketOptimizationException.class)
     public ResponseEntity<String> handleBasketOptimizationException(BasketOptimizationException ex) {
         log.error("Basket Optimization Exception: ", ex);
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body("Error optimizing shopping basket: " + ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error optimizing shopping basket: " + ex.getMessage());
     }
 
+    @ExceptionHandler(PriceAlertException.class)
+    public ResponseEntity<String> handlePriceAlertException(PriceAlertException ex) {
+        log.error("Price Alert Exception: ", ex);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error with price alert: " + ex.getMessage());
+    }
 
 }

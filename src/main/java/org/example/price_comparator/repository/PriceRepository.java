@@ -16,5 +16,7 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
     List<Price> findByProductAndDateLessThanEqualOrderByDateDesc(Product product, LocalDate date);
     List<Price> findByProductAndDateBetweenOrderByDateAsc(Product product, LocalDate startDate, LocalDate endDate);
     List<Price> findByProductAndStoreAndDateBetweenOrderByDateAsc(Product product, Store store, LocalDate startDate, LocalDate endDate);
+    Optional<Price> findTopByProductAndStoreOrderByDateDesc(Product product, Store store);
+    List<Price> findByProductOrderByDateDesc(Product product);
 }
 
