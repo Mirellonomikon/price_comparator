@@ -30,6 +30,7 @@ price-comparator/
 ### Prerequisites
 - Java 17+ (JDK)
 - Maven
+- Spring Boot 3.x
 - Docker and Docker Compose (for containerized deployment)
 - PostgreSQL (for local development)
 ### Local Development
